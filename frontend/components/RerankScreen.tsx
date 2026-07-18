@@ -4,7 +4,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 import { resolveCardArt } from "@/data/card-art";
-import { formatMoney, PERSONA_TRANSACTIONS } from "@/data/transactions";
+import { PERSONA_TRANSACTIONS } from "@/data/transactions";
 import type { PipelineHit } from "@/data/mock-savings";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -40,12 +40,6 @@ export function RerankScreen({ personaId, hits, onComplete }: RerankScreenProps)
     return () => cancelAnimationFrame(raf);
   }, [onComplete]);
 
-  const formulas = [
-    "s′ = α·cos(θ) + β·E[rewards] − γ·fee",
-    "E[rewards] = Σ c∈C  rate_c · spend_c",
-    "rank = softmax(s′₁…s′ₖ)",
-  ];
-
   return (
     <motion.section
       className="relative z-10 mx-auto flex h-[100svh] w-full max-w-3xl flex-col items-center justify-center overflow-hidden px-6 pt-24 pb-10 text-center"
@@ -58,25 +52,11 @@ export function RerankScreen({ personaId, hits, onComplete }: RerankScreenProps)
         Personalizing rankings
       </h2>
       <p className="mb-8 max-w-lg text-[14px] leading-relaxed text-[var(--muted)] sm:text-[15px]">
-        Re-ranking KNN results to personalize card recommendations
+        Pricing each KNN match against your spend, then ranking by projected
+        dollar value vs. your current card
       </p>
 
       <div className="relative mb-8 w-full max-w-xl overflow-hidden rounded-[12px] border border-[var(--border)] bg-[#FAFAF8] px-4 py-6 sm:px-6">
-        {/* Fake formula board */}
-        <div className="mb-6 space-y-2 font-mono text-[12px] text-[var(--ink)] sm:text-[13px]">
-          {formulas.map((f, i) => (
-            <motion.p
-              key={f}
-              className="rounded-[8px] border border-[var(--border)] bg-white px-3 py-2 text-left"
-              initial={{ opacity: 0, x: -12 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.15 + i * 0.2, duration: 0.45, ease }}
-            >
-              {f}
-            </motion.p>
-          ))}
-        </div>
-
         {/* Feeding chips */}
         <div className="relative mb-5 h-[120px]">
           {txns.map((txn, i) => (

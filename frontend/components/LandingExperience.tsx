@@ -328,11 +328,7 @@ export function LandingExperience() {
           />
         ) : null}
         {stage === "results" && pipeline ? (
-          <ResultsExperience
-            key="results"
-            personaId={selectedId ?? "urban_diner"}
-            hits={pipeline.topK}
-          />
+          <ResultsExperience key="results" pipeline={pipeline} />
         ) : null}
       </AnimatePresence>
     </>

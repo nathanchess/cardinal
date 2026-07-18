@@ -9,6 +9,14 @@ export type PersonaOption = {
   creditScore?: number;
   /** Checking available balance for the fake statement header */
   balance?: number;
+  /**
+   * The card this persona currently holds. Ranking/value math is a delta
+   * against this card's own calculate_card_value() result, not a standalone
+   * score -- mirrors personas/registry.py on the Python side.
+   */
+  currentCardId?: string;
+  /** consumer vs small_business hard filter, mirrors registry.py's profile.audience */
+  audience?: "consumer" | "small_business";
 };
 
 export const PERSONA_OPTIONS: PersonaOption[] = [
@@ -22,6 +30,8 @@ export const PERSONA_OPTIONS: PersonaOption[] = [
     accountLabel: "TOTAL CHECKING",
     creditScore: 742,
     balance: 6842.17,
+    currentCardId: "wells-fargo-active-cash",
+    audience: "consumer",
   },
   {
     id: "no_fee_cashback",
@@ -33,6 +43,8 @@ export const PERSONA_OPTIONS: PersonaOption[] = [
     accountLabel: "EVERYDAY CHECKING",
     creditScore: 691,
     balance: 2148.53,
+    currentCardId: "amex-everyday-preferred-credit-card",
+    audience: "consumer",
   },
   {
     id: "delta_premium_flyer",
@@ -44,6 +56,8 @@ export const PERSONA_OPTIONS: PersonaOption[] = [
     accountLabel: "PREMIER CHECKING",
     creditScore: 798,
     balance: 18420.66,
+    currentCardId: "citi-double-cash",
+    audience: "consumer",
   },
   {
     id: "custom",

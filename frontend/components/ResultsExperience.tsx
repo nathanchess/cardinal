@@ -6,30 +6,45 @@ import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useMemo, useState } from "react";
 import { resolveCardArt } from "@/data/card-art";
 import cardUrls from "@/data/card-urls.json";
-import {
-  buildMockSavingsReport,
-  type PipelineHit,
-} from "@/data/mock-savings";
+import type { PipelinePayload } from "@/data/mock-savings";
 import { formatMoney } from "@/data/transactions";
+import type { CardValue, CategoryBreakdown, PricedBenefit } from "@/lib/calculator";
+import type { RankedRecommendation } from "@/lib/ranking";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 type ResultsExperienceProps = {
-  personaId: string;
-  hits: PipelineHit[];
+  pipeline: PipelinePayload;
 };
 
 type NavTab = "recommended" | "mission";
 
-export function ResultsExperience({ personaId, hits }: ResultsExperienceProps) {
+const CATEGORY_LABELS: Record<string, string> = {
+  dining: "Dining",
+  groceries: "Groceries",
+  gas: "Gas",
+  transit: "Transit",
+  travel_flights: "Flights",
+  travel_hotels: "Hotels",
+  travel_other: "Other travel",
+  streaming: "Streaming",
+  drugstores: "Drugstores",
+  online_shopping: "Online shopping",
+  wholesale_clubs: "Wholesale clubs",
+  utilities: "Utilities",
+  entertainment: "Entertainment",
+  general: "Everything else",
+};
+
+export function ResultsExperience({ pipeline }: ResultsExperienceProps) {
   const [tab, setTab] = useState<NavTab>("recommended");
   const [index, setIndex] = useState(0);
-  const list = hits.length ? hits : [];
-  const hit = list[index] ?? null;
+  const list = pipeline.recommendations ?? [];
+  const rec = list[index] ?? null;
 
-  const report = useMemo(
-    () => (hit ? buildMockSavingsReport(personaId, hit, index) : null),
-    [personaId, hit, index],
+  const officialUrlById = useMemo(
+    () => new Map(pipeline.topK.map((hit) => [hit.id, hit.officialUrl ?? null])),
+    [pipeline.topK],
   );
 
   const go = (dir: -1 | 1) => {
@@ -100,22 +115,26 @@ export function ResultsExperience({ personaId, hits }: ResultsExperienceProps) {
               <p className="max-w-xl text-[15px] leading-relaxed text-[var(--muted)]">
                 Cardinal matches how you already spend to cards that fit —
                 embedding your redacted activity, retrieving similar cards with
-                Redis vector search, then re-ranking for personalized projected
-                value.
+                Redis vector search, then re-ranking by projected dollar value
+                against the card you have today.
               </p>
             </motion.div>
-          ) : hit && report ? (
+          ) : rec ? (
             <FeaturedCardReport
-              key={hit.id}
-              hit={hit}
-              report={report}
+              key={rec.card_id}
+              rec={rec}
+              currentCardValue={pipeline.currentCardValue}
+              currentCardName={pipeline.currentCardName}
+              officialUrl={officialUrlById.get(rec.card_id) ?? null}
               index={index}
               total={list.length}
               onPrev={() => go(-1)}
               onNext={() => go(1)}
             />
           ) : (
-            <p className="pt-8 text-[var(--muted)]">No recommendations yet.</p>
+            <p className="pt-8 text-[var(--muted)]">
+              No comparable cards found for this profile.
+            </p>
           )}
         </AnimatePresence>
       </div>
@@ -147,26 +166,173 @@ function NavLink({
   );
 }
 
+type BreakdownRow = { label: string; amount: number; detail: string };
+
+type BreakdownSections = {
+  earnRateRows: BreakdownRow[];
+  earnRateTotal: number;
+  benefitRows: BreakdownRow[];
+  benefitsTotal: number;
+  annualFee: number;
+  netValue: number;
+};
+
+function buildBreakdownSections(rec: RankedRecommendation): BreakdownSections {
+  const earnRateRows: BreakdownRow[] = [];
+  const categories = Object.entries(rec.card_value.by_category) as [
+    string,
+    CategoryBreakdown,
+  ][];
+  for (const [category, row] of categories) {
+    if (row.spend_usd <= 0) continue;
+    const label = CATEGORY_LABELS[category] ?? category;
+    const unit = row.unit === "percent_cashback" ? "%" : "x";
+    const rateText = `${row.rate}${unit}`;
+    const detail = row.matched_label
+      ? `${rateText} on ${row.matched_label.toLowerCase()}${row.capped ? " (capped, overflow at base rate)" : ""} · $${row.spend_usd.toLocaleString()} spent`
+      : `${rateText} base rate · $${row.spend_usd.toLocaleString()} spent`;
+    earnRateRows.push({ label, amount: row.reward_value_usd, detail });
+  }
+
+  const benefitRows: BreakdownRow[] = [];
+  for (const benefit of rec.card_value.priced_benefits as PricedBenefit[]) {
+    const parts: string[] = [`$${benefit.value_usd.toLocaleString()} face value`];
+    if (benefit.friction_multiplier < 1) parts.push("enrollment required");
+    if (benefit.frequency_multiplier < 1) parts.push("every 4 years");
+    benefitRows.push({
+      label: benefit.name.length > 60 ? `${benefit.name.slice(0, 57)}...` : benefit.name,
+      amount: benefit.priced_value_usd,
+      detail: parts.join(" · "),
+    });
+  }
+
+  const earnRateTotal = earnRateRows.reduce((sum, r) => sum + r.amount, 0);
+  const benefitsTotal = benefitRows.reduce((sum, r) => sum + r.amount, 0);
+
+  return {
+    earnRateRows,
+    earnRateTotal,
+    benefitRows,
+    benefitsTotal,
+    annualFee: rec.card_value.annual_fee_usd,
+    netValue: rec.card_value.net_annual_value_usd,
+  };
+}
+
+function BreakdownSection({
+  title,
+  rows,
+  subtotalLabel,
+  subtotal,
+}: {
+  title: string;
+  rows: BreakdownRow[];
+  subtotalLabel: string;
+  subtotal: number;
+}) {
+  if (!rows.length) return null;
+  return (
+    <div>
+      <p className="mb-2 text-[12px] font-semibold uppercase tracking-[0.06em] text-[var(--muted)]">
+        {title}
+      </p>
+      <ul className="divide-y divide-[var(--border)] rounded-[12px] border border-[var(--border)] bg-white">
+        {rows.map((row) => (
+          <li
+            key={row.label}
+            className="flex items-start justify-between gap-4 px-4 py-3"
+          >
+            <div className="min-w-0">
+              <p className="text-[14px] font-semibold text-[var(--ink)]">
+                {row.label}
+              </p>
+              <p className="mt-0.5 text-[12px] leading-snug text-[var(--muted)]">
+                {row.detail}
+              </p>
+            </div>
+            <p
+              className={`shrink-0 text-[14px] font-semibold tabular-nums ${
+                row.amount < 0 ? "text-[var(--muted)]" : "text-[var(--ink)]"
+              }`}
+            >
+              {row.amount < 0 ? "−" : "+"}
+              {formatMoney(Math.abs(row.amount))}
+            </p>
+          </li>
+        ))}
+        <li className="flex items-center justify-between gap-4 bg-[#FAFAF8] px-4 py-2.5">
+          <p className="text-[13px] font-semibold text-[var(--ink)]">{subtotalLabel}</p>
+          <p className="text-[13px] font-semibold tabular-nums text-[var(--ink)]">
+            {formatMoney(subtotal)}
+          </p>
+        </li>
+      </ul>
+    </div>
+  );
+}
+
+function TotalLine({ label, amount }: { label: string; amount: number }) {
+  return (
+    <div className="flex items-center justify-between gap-4">
+      <p className="text-[13px] text-[var(--muted)]">{label}</p>
+      <p
+        className={`text-[13px] tabular-nums ${
+          amount < 0 ? "text-[var(--muted)]" : "text-[var(--ink)]"
+        }`}
+      >
+        {amount < 0 ? "−" : "+"}
+        {formatMoney(Math.abs(amount))}
+      </p>
+    </div>
+  );
+}
+
 function FeaturedCardReport({
-  hit,
-  report,
+  rec,
+  currentCardValue,
+  currentCardName,
+  officialUrl,
   index,
   total,
   onPrev,
   onNext,
 }: {
-  hit: PipelineHit;
-  report: ReturnType<typeof buildMockSavingsReport>;
+  rec: RankedRecommendation;
+  currentCardValue: CardValue | null;
+  currentCardName: string | null;
+  officialUrl: string | null;
   index: number;
   total: number;
   onPrev: () => void;
   onNext: () => void;
 }) {
-  const art = resolveCardArt(hit.id);
-  const applyHref =
-    hit.officialUrl ||
-    (cardUrls as Record<string, string>)[hit.id] ||
-    "#";
+  const art = resolveCardArt(rec.card_id);
+  const applyHref = officialUrl || (cardUrls as Record<string, string>)[rec.card_id] || "#";
+  const sections = useMemo(() => buildBreakdownSections(rec), [rec]);
+  const currentCardLabel = currentCardName ?? "your current card";
+
+  // Cumulative running totals, not a flat per-month figure: each card earns
+  // its own net_annual_value_usd / 12 every month, and the two lines diverge
+  // as that accumulates, rather than jumping straight to a single average.
+  const cumulative = useMemo(() => {
+    const months = [
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+    ];
+    const currentMonthly = (currentCardValue?.net_annual_value_usd ?? 0) / 12;
+    const candidateMonthly = rec.card_value.net_annual_value_usd / 12;
+    let currentRunning = 0;
+    let candidateRunning = 0;
+    return months.map((label) => {
+      currentRunning += currentMonthly;
+      candidateRunning += candidateMonthly;
+      return {
+        label,
+        current: Math.round(currentRunning),
+        candidate: Math.round(candidateRunning),
+      };
+    });
+  }, [rec, currentCardValue]);
 
   return (
     <motion.article
@@ -212,34 +378,34 @@ function FeaturedCardReport({
           ) : (
             <div className="flex h-full flex-col justify-between p-3 text-white">
               <span className="text-[11px] uppercase tracking-wide text-white/70">
-                {hit.issuer}
+                {rec.issuer}
               </span>
-              <span className="text-[13px] font-semibold">{hit.name}</span>
+              <span className="text-[13px] font-semibold">{rec.name}</span>
             </div>
           )}
         </div>
         <div className="min-w-0 flex-1">
           <p className="mb-1 text-[12px] font-semibold uppercase tracking-[0.06em] text-[var(--muted)]">
-            {hit.issuer}
+            {rec.issuer}
           </p>
           <h2 className="mb-3 text-[24px] font-semibold tracking-[-0.03em] text-[var(--ink)] sm:text-[28px]">
-            {hit.name}
+            {rec.name}
           </h2>
           <div className="flex flex-wrap items-end gap-4">
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--muted)]">
-                Rank score
+                Projected annual savings
               </p>
-              <p className="text-[36px] font-semibold leading-none tracking-tight text-[var(--ink)]">
-                {report.rankScore}
+              <p className="text-[36px] font-semibold leading-none tabular-nums tracking-tight text-[#1B6BC4]">
+                {formatMoney(rec.delta_usd)}
               </p>
             </div>
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--muted)]">
-                Est. annual net
+                Total annual value
               </p>
-              <p className="text-[22px] font-semibold tabular-nums text-[#1B6BC4]">
-                {formatMoney(report.annualSavings)}
+              <p className="text-[22px] font-semibold tabular-nums text-[var(--ink)]">
+                {formatMoney(rec.card_value.total_reward_value_usd)}
               </p>
             </div>
           </div>
@@ -249,14 +415,15 @@ function FeaturedCardReport({
       <section className="mb-8">
         <div className="mb-3 flex items-end justify-between gap-3">
           <h3 className="text-[15px] font-semibold tracking-[-0.02em] text-[var(--ink)]">
-            Projected savings
+            Projected savings vs. {currentCardLabel}
           </h3>
-          <p className="text-[11px] text-[var(--muted)]">
-            Points → $ at {report.cpp}¢ / pt
-          </p>
         </div>
         <div className="rounded-[12px] border border-[var(--border)] bg-[#FAFAF8] px-2 pb-2 pt-3 sm:px-4 sm:pt-4">
-          <SavingsAreaChart monthly={report.monthly} />
+          <SavingsAreaChart
+            data={cumulative}
+            currentLabel={currentCardLabel}
+            candidateLabel={rec.name}
+          />
         </div>
       </section>
 
@@ -265,37 +432,48 @@ function FeaturedCardReport({
           How this was calculated
         </h3>
         <ol className="mb-4 list-decimal space-y-1.5 pl-5 text-[14px] leading-relaxed text-[var(--muted)]">
-          {report.methodNotes.map((note) => (
-            <li key={note}>{note}</li>
-          ))}
+          <li>Map your annual spend by category to this card&apos;s real earn rates (respecting spend caps).</li>
+          <li>Price every credit and statement benefit on the card at face value, annualized by its cadence.</li>
+          <li>Subtract the annual fee to get this card&apos;s total net annual value.</li>
+          <li>Compare that to {currentCardLabel}&apos;s net annual value, priced the same way, to get the savings above.</li>
         </ol>
-        <ul className="divide-y divide-[var(--border)] rounded-[12px] border border-[var(--border)] bg-white">
-          {report.breakdown.map((row) => (
-            <li
-              key={row.label}
-              className="flex items-start justify-between gap-4 px-4 py-3"
-            >
-              <div className="min-w-0">
+        <div className="space-y-4">
+          <BreakdownSection
+            title="Earn rate rewards"
+            rows={sections.earnRateRows}
+            subtotalLabel="Total earn rate value"
+            subtotal={sections.earnRateTotal}
+          />
+          <BreakdownSection
+            title="Benefits & credits"
+            rows={sections.benefitRows}
+            subtotalLabel="Total benefits value"
+            subtotal={sections.benefitsTotal}
+          />
+
+          <div className="rounded-[12px] border border-[var(--border)] bg-white px-4 py-3">
+            <p className="mb-2 text-[12px] font-semibold uppercase tracking-[0.06em] text-[var(--muted)]">
+              Total calculation
+            </p>
+            <div className="space-y-1.5">
+              <TotalLine label="Earn rate value" amount={sections.earnRateTotal} />
+              <TotalLine label="Benefits value" amount={sections.benefitsTotal} />
+              <TotalLine label="Annual fee" amount={-sections.annualFee} />
+              <div className="mt-1.5 flex items-center justify-between gap-4 border-t border-[var(--border)] pt-1.5">
                 <p className="text-[14px] font-semibold text-[var(--ink)]">
-                  {row.label}
+                  Net annual value
                 </p>
-                <p className="mt-0.5 text-[12px] leading-snug text-[var(--muted)]">
-                  {row.detail}
+                <p className="text-[14px] font-semibold tabular-nums text-[var(--ink)]">
+                  {formatMoney(sections.netValue)}
                 </p>
               </div>
-              <p
-                className={`shrink-0 text-[14px] font-semibold tabular-nums ${
-                  row.amount < 0 ? "text-[var(--muted)]" : "text-[var(--ink)]"
-                }`}
-              >
-                {row.amount < 0 ? "−" : "+"}
-                {formatMoney(Math.abs(row.amount))}
-              </p>
-            </li>
-          ))}
-        </ul>
+            </div>
+          </div>
+        </div>
         <p className="mt-3 text-[12px] leading-relaxed text-[var(--muted)]">
-          {report.disclaimer}
+          Projected from your redacted spend and each card&apos;s published earn
+          rates and benefits — assumes full engagement with every credit
+          listed. Confirm current terms with the issuer before applying.
         </p>
       </section>
 
@@ -312,13 +490,20 @@ function FeaturedCardReport({
   );
 }
 
+const CURRENT_COLOR = "#9A9A93";
+const CANDIDATE_COLOR = "#1B6BC4";
+
 function SavingsAreaChart({
-  monthly,
+  data,
+  currentLabel,
+  candidateLabel,
 }: {
-  monthly: { label: string; amount: number; points: number }[];
+  data: { label: string; current: number; candidate: number }[];
+  currentLabel: string;
+  candidateLabel: string;
 }) {
   const width = 420;
-  const height = 200;
+  const height = 216;
   const padL = 44;
   const padR = 12;
   const padT = 16;
@@ -326,88 +511,129 @@ function SavingsAreaChart({
   const plotW = width - padL - padR;
   const plotH = height - padT - padB;
 
-  const maxY = Math.max(...monthly.map((m) => m.amount), 1);
+  const maxY = Math.max(...data.map((m) => Math.max(m.current, m.candidate)), 1);
   const niceMax = niceCeil(maxY);
   const yTicks = [0, 0.5, 1].map((t) => niceMax * t);
 
-  const pts = monthly.map((m, i) => {
-    const x =
-      padL + (monthly.length === 1 ? plotW / 2 : (i / (monthly.length - 1)) * plotW);
-    const y = padT + plotH - (m.amount / niceMax) * plotH;
-    return { x, y, ...m };
-  });
+  const xFor = (i: number) =>
+    padL + (data.length === 1 ? plotW / 2 : (i / (data.length - 1)) * plotW);
+  const yFor = (amount: number) => padT + plotH - (amount / niceMax) * plotH;
 
-  const linePath = smoothLine(pts);
-  const areaPath = `${linePath} L ${pts[pts.length - 1]!.x} ${padT + plotH} L ${pts[0]!.x} ${padT + plotH} Z`;
+  const currentPts = data.map((m, i) => ({ x: xFor(i), y: yFor(m.current), ...m }));
+  const candidatePts = data.map((m, i) => ({ x: xFor(i), y: yFor(m.candidate), ...m }));
+
+  const currentLine = smoothLine(currentPts);
+  const candidateLine = smoothLine(candidatePts);
+
+  // Shaded gap between the two lines -- candidate is always >= current here
+  // (top-10 list is already filtered to positive annual delta, and both
+  // trajectories are the same linear per-month accumulation), so tracing
+  // candidate forward then current backward always yields a valid polygon.
+  const gapPath = `${candidateLine} L ${currentPts[currentPts.length - 1]!.x} ${currentPts[currentPts.length - 1]!.y} ${[...currentPts]
+    .reverse()
+    .slice(1)
+    .map((p) => `L ${p.x} ${p.y}`)
+    .join(" ")} Z`;
 
   return (
-    <svg
-      viewBox={`0 0 ${width} ${height}`}
-      className="h-auto w-full"
-      role="img"
-      aria-label="Projected monthly savings over the year"
-    >
-      <defs>
-        <linearGradient id="savingsFill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#111111" stopOpacity="0.22" />
-          <stop offset="100%" stopColor="#111111" stopOpacity="0.02" />
-        </linearGradient>
-      </defs>
+    <div>
+      <div className="mb-2 flex items-center gap-4 px-1">
+        <Legend color={CANDIDATE_COLOR} label={candidateLabel} />
+        <Legend color={CURRENT_COLOR} label={currentLabel} />
+      </div>
+      <svg
+        viewBox={`0 0 ${width} ${height}`}
+        className="h-auto w-full"
+        role="img"
+        aria-label={`Cumulative projected value over the year: ${candidateLabel} vs. ${currentLabel}`}
+      >
+        <defs>
+          <linearGradient id="gapFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor={CANDIDATE_COLOR} stopOpacity="0.16" />
+            <stop offset="100%" stopColor={CANDIDATE_COLOR} stopOpacity="0.03" />
+          </linearGradient>
+        </defs>
 
-      {yTicks.map((tick) => {
-        const y = padT + plotH - (tick / niceMax) * plotH;
-        return (
-          <g key={tick}>
-            <line
-              x1={padL}
-              x2={width - padR}
-              y1={y}
-              y2={y}
-              stroke="#E5E5E1"
-              strokeWidth={1}
-            />
+        {yTicks.map((tick) => {
+          const y = padT + plotH - (tick / niceMax) * plotH;
+          return (
+            <g key={tick}>
+              <line
+                x1={padL}
+                x2={width - padR}
+                y1={y}
+                y2={y}
+                stroke="#E5E5E1"
+                strokeWidth={1}
+              />
+              <text
+                x={padL - 8}
+                y={y + 3}
+                textAnchor="end"
+                fontSize="10"
+                fill="#6B6B66"
+              >
+                ${Math.round(tick)}
+              </text>
+            </g>
+          );
+        })}
+
+        <path d={gapPath} fill="url(#gapFill)" />
+
+        <path
+          d={currentLine}
+          fill="none"
+          stroke={CURRENT_COLOR}
+          strokeWidth={2}
+          strokeDasharray="4 3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d={candidateLine}
+          fill="none"
+          stroke={CANDIDATE_COLOR}
+          strokeWidth={2.25}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+
+        {currentPts.map((p) => (
+          <circle key={`cur-${p.label}`} cx={p.x} cy={p.y} r={2} fill={CURRENT_COLOR} />
+        ))}
+        {candidatePts.map((p) => (
+          <circle key={`cand-${p.label}`} cx={p.x} cy={p.y} r={2.5} fill={CANDIDATE_COLOR} />
+        ))}
+
+        {data.map((p, i) =>
+          i % 2 === 0 || i === data.length - 1 ? (
             <text
-              x={padL - 8}
-              y={y + 3}
-              textAnchor="end"
+              key={`lbl-${p.label}`}
+              x={xFor(i)}
+              y={height - 12}
+              textAnchor="middle"
               fontSize="10"
               fill="#6B6B66"
             >
-              ${Math.round(tick)}
+              {p.label}
             </text>
-          </g>
-        );
-      })}
+          ) : null,
+        )}
+      </svg>
+    </div>
+  );
+}
 
-      <path d={areaPath} fill="url(#savingsFill)" />
-      <path
-        d={linePath}
-        fill="none"
-        stroke="#111111"
-        strokeWidth={2.25}
-        strokeLinecap="round"
-        strokeLinejoin="round"
+function Legend({ color, label }: { color: string; label: string }) {
+  return (
+    <div className="flex items-center gap-1.5">
+      <span
+        className="h-2 w-2 shrink-0 rounded-full"
+        style={{ backgroundColor: color }}
       />
-
-      {pts.map((p) => (
-        <circle key={p.label} cx={p.x} cy={p.y} r={2.5} fill="#111111" />
-      ))}
-
-      {pts.map((p, i) =>
-        i % 2 === 0 || i === pts.length - 1 ? (
-          <text
-            key={`lbl-${p.label}`}
-            x={p.x}
-            y={height - 12}
-            textAnchor="middle"
-            fontSize="10"
-            fill="#6B6B66"
-          >
-            {p.label}
-          </text>
-        ) : null,
-      )}
-    </svg>
+      <span className="text-[11px] font-medium text-[var(--muted)]">{label}</span>
+    </div>
   );
 }
 

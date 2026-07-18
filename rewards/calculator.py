@@ -1,10 +1,5 @@
 """Compute a card's projected annual reward value given category spend totals.
 
-Known limitation: each taxonomy category is capped against its own matched
-earn_rate independently. Real issuer caps that pool multiple taxonomy
-categories under one bonus line (e.g. "streaming + online grocery") are not
-modeled as a combined cap here -- not worth the complexity for a demo.
-
 Benefits and earn rates are both priced as best-case projections: a benefit
 counts at full face value once its cadence and any enrollment/activation
 friction are applied (no attempt to model whether this specific user would

@@ -1,15 +1,14 @@
-"""Sample personas for the mocked demo flow.
+"""Sample personas shared by the CLI validator and the API.
 
-Moved out of main.py so both the CLI validator (main.py) and the API
-(api/service.py) share one source of truth. `spend_profile` here is the
-hand-authored fallback used only for fields render_user_persona needs beyond
-spend_profile (primary_goals, fee_tier, lifestyle_tags, summary, ...) --
-at request time the API overrides `spend_profile` with one computed from
-this persona's sample transactions (see preprocess/persona_building.py).
+`spend_profile` here is the hand-authored fallback used only for fields
+render_user_persona needs beyond spend_profile (primary_goals, fee_tier,
+lifestyle_tags, summary, ...) -- at request time the API overrides
+`spend_profile` with one computed from this persona's sample transactions
+(see preprocess/persona_building.py).
 
 Tier vocabulary is restricted to base/medium/high, matching the only values
-taxonomy.reward_intensity() can ever produce on the card side -- "dominant"
-is never emitted by any card and was previously a stray token here.
+taxonomy.reward_intensity() can ever produce on the card side. "dominant" is
+not a valid intensity on either side of the shared vocabulary.
 """
 
 from __future__ import annotations

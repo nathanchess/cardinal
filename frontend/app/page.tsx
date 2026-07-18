@@ -1,5 +1,9 @@
-import { HomeHero } from "@/components/HomeHero";
+import { LandingExperience } from "@/components/LandingExperience";
 
 export default function Home() {
-  return <HomeHero />;
+  return (
+    <main className="relative isolate min-h-[100svh] overflow-x-hidden bg-[var(--bg)]">
+      <LandingExperience />
+    </main>
+  );
 }

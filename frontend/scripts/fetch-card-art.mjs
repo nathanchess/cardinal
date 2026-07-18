@@ -1,5 +1,5 @@
 /**
- * Scrape official card pages for product art and download into app/public/cards.
+ * Scrape official card pages for product art and download into public/cards.
  * Usage: node scripts/fetch-card-art.mjs
  */
 import { execFileSync } from "child_process";
@@ -8,10 +8,10 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(__dirname, "../..");
-const APP_CARDS = path.join(ROOT, "app/public/cards");
-const CATALOG = path.join(ROOT, "data/credit_cards.json");
-const OUT_MAP = path.join(ROOT, "app/src/data/card-art-map.json");
+const ROOT = path.resolve(__dirname, "..");
+const APP_CARDS = path.join(ROOT, "public/cards");
+const CATALOG = path.join(ROOT, "../data/credit_cards.json");
+const OUT_MAP = path.join(ROOT, "data/card-art-map.json");
 const FIRECRAWL_DIR = path.join(ROOT, ".firecrawl/card-art");
 
 fs.mkdirSync(APP_CARDS, { recursive: true });

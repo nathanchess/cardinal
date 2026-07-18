@@ -1,0 +1,347 @@
+{
+  "persona_id": "delta_premium_flyer",
+  "transactions": [
+    {
+      "date": "2025-08-02",
+      "merchant": "Thai Villa",
+      "amount": 659.88,
+      "category": "dining"
+    },
+    {
+      "date": "2025-08-19",
+      "merchant": "Amazon Marketplace",
+      "amount": 851.61,
+      "category": "general"
+    },
+    {
+      "date": "2025-08-20",
+      "merchant": "Duane Reade",
+      "amount": 521.91,
+      "category": "drugstores"
+    },
+    {
+      "date": "2025-08-21",
+      "merchant": "Best Buy Online",
+      "amount": 538.67,
+      "category": "online_shopping"
+    },
+    {
+      "date": "2025-08-26",
+      "merchant": "JetBlue",
+      "amount": 919.61,
+      "category": "travel_flights"
+    },
+    {
+      "date": "2025-08-27",
+      "merchant": "Shake Shack",
+      "amount": 981.53,
+      "category": "dining"
+    },
+    {
+      "date": "2025-08-30",
+      "merchant": "Delta Air Lines",
+      "amount": 1061.73,
+      "category": "travel_flights"
+    },
+    {
+      "date": "2025-08-30",
+      "merchant": "Delta Air Lines",
+      "amount": 475.16,
+      "category": "travel_flights"
+    },
+    {
+      "date": "2025-08-31",
+      "merchant": "United Airlines",
+      "amount": 838.82,
+      "category": "travel_flights"
+    },
+    {
+      "date": "2025-09-05",
+      "merchant": "Hilton",
+      "amount": 612.95,
+      "category": "travel_hotels"
+    },
+    {
+      "date": "2025-09-07",
+      "merchant": "Marriott",
+      "amount": 846.52,
+      "category": "travel_hotels"
+    },
+    {
+      "date": "2025-09-07",
+      "merchant": "Hilton",
+      "amount": 1084.18,
+      "category": "travel_hotels"
+    },
+    {
+      "date": "2025-09-27",
+      "merchant": "Trader Joe's",
+      "amount": 618.72,
+      "category": "groceries"
+    },
+    {
+      "date": "2025-09-29",
+      "merchant": "Hertz Rent A Car",
+      "amount": 770.94,
+      "category": "travel_other"
+    },
+    {
+      "date": "2025-10-06",
+      "merchant": "DoorDash",
+      "amount": 819.1,
+      "category": "dining"
+    },
+    {
+      "date": "2025-10-07",
+      "merchant": "Hyatt Regency",
+      "amount": 936.24,
+      "category": "travel_hotels"
+    },
+    {
+      "date": "2025-10-08",
+      "merchant": "Enterprise Rent-A-Car",
+      "amount": 826.34,
+      "category": "travel_other"
+    },
+    {
+      "date": "2025-10-15",
+      "merchant": "USPS",
+      "amount": 431.01,
+      "category": "general"
+    },
+    {
+      "date": "2025-10-19",
+      "merchant": "United Airlines",
+      "amount": 517.43,
+      "category": "travel_flights"
+    },
+    {
+      "date": "2025-10-23",
+      "merchant": "Equinox Fitness",
+      "amount": 765.64,
+      "category": "entertainment"
+    },
+    {
+      "date": "2025-11-04",
+      "merchant": "Delta Air Lines",
+      "amount": 529.9,
+      "category": "travel_flights"
+    },
+    {
+      "date": "2025-11-16",
+      "merchant": "Target.com",
+      "amount": 661.33,
+      "category": "online_shopping"
+    },
+    {
+      "date": "2025-11-22",
+      "merchant": "Walgreens",
+      "amount": 278.09,
+      "category": "drugstores"
+    },
+    {
+      "date": "2025-11-23",
+      "merchant": "Netflix",
+      "amount": 172.7,
+      "category": "streaming"
+    },
+    {
+      "date": "2025-12-15",
+      "merchant": "National Grid",
+      "amount": 522.29,
+      "category": "utilities"
+    },
+    {
+      "date": "2025-12-18",
+      "merchant": "Enterprise Rent-A-Car",
+      "amount": 796.45,
+      "category": "travel_other"
+    },
+    {
+      "date": "2025-12-20",
+      "merchant": "Le Coucou",
+      "amount": 922.42,
+      "category": "dining"
+    },
+    {
+      "date": "2025-12-30",
+      "merchant": "United Airlines",
+      "amount": 1028.3,
+      "category": "travel_flights"
+    },
+    {
+      "date": "2026-01-04",
+      "merchant": "Spotify",
+      "amount": 227.3,
+      "category": "streaming"
+    },
+    {
+      "date": "2026-01-08",
+      "merchant": "Delta Air Lines",
+      "amount": 533.14,
+      "category": "travel_flights"
+    },
+    {
+      "date": "2026-02-06",
+      "merchant": "Hyatt Regency",
+      "amount": 719.31,
+      "category": "travel_hotels"
+    },
+    {
+      "date": "2026-02-11",
+      "merchant": "Delta Air Lines",
+      "amount": 562.61,
+      "category": "travel_flights"
+    },
+    {
+      "date": "2026-02-16",
+      "merchant": "American Airlines",
+      "amount": 592.81,
+      "category": "travel_flights"
+    },
+    {
+      "date": "2026-02-23",
+      "merchant": "Delta Air Lines",
+      "amount": 748.26,
+      "category": "travel_flights"
+    },
+    {
+      "date": "2026-02-27",
+      "merchant": "National Grid",
+      "amount": 277.71,
+      "category": "utilities"
+    },
+    {
+      "date": "2026-02-28",
+      "merchant": "AMC Theatres",
+      "amount": 434.36,
+      "category": "entertainment"
+    },
+    {
+      "date": "2026-03-05",
+      "merchant": "JetBlue",
+      "amount": 1074.64,
+      "category": "travel_flights"
+    },
+    {
+      "date": "2026-03-21",
+      "merchant": "American Airlines",
+      "amount": 787.46,
+      "category": "travel_flights"
+    },
+    {
+      "date": "2026-03-23",
+      "merchant": "Hyatt Regency",
+      "amount": 735.18,
+      "category": "travel_hotels"
+    },
+    {
+      "date": "2026-03-23",
+      "merchant": "Marriott",
+      "amount": 805.29,
+      "category": "travel_hotels"
+    },
+    {
+      "date": "2026-04-15",
+      "merchant": "United Airlines",
+      "amount": 841.82,
+      "category": "travel_flights"
+    },
+    {
+      "date": "2026-04-17",
+      "merchant": "Hyatt Regency",
+      "amount": 589.64,
+      "category": "travel_hotels"
+    },
+    {
+      "date": "2026-05-11",
+      "merchant": "Enterprise Rent-A-Car",
+      "amount": 497.19,
+      "category": "travel_other"
+    },
+    {
+      "date": "2026-05-11",
+      "merchant": "Avis Car Rental",
+      "amount": 997.43,
+      "category": "travel_other"
+    },
+    {
+      "date": "2026-05-14",
+      "merchant": "Exxon",
+      "amount": 679.85,
+      "category": "gas"
+    },
+    {
+      "date": "2026-05-15",
+      "merchant": "Trader Joe's",
+      "amount": 462.29,
+      "category": "groceries"
+    },
+    {
+      "date": "2026-05-19",
+      "merchant": "United Airlines",
+      "amount": 800.52,
+      "category": "travel_flights"
+    },
+    {
+      "date": "2026-05-24",
+      "merchant": "Delta Air Lines",
+      "amount": 1067.77,
+      "category": "travel_flights"
+    },
+    {
+      "date": "2026-05-26",
+      "merchant": "CVS",
+      "amount": 717.38,
+      "category": "general"
+    },
+    {
+      "date": "2026-06-01",
+      "merchant": "Delta Air Lines",
+      "amount": 990.33,
+      "category": "travel_flights"
+    },
+    {
+      "date": "2026-06-06",
+      "merchant": "Avis Car Rental",
+      "amount": 406.78,
+      "category": "travel_other"
+    },
+    {
+      "date": "2026-06-14",
+      "merchant": "Chevron",
+      "amount": 520.15,
+      "category": "gas"
+    },
+    {
+      "date": "2026-06-21",
+      "merchant": "Dos Toros",
+      "amount": 617.07,
+      "category": "dining"
+    },
+    {
+      "date": "2026-07-06",
+      "merchant": "Hertz Rent A Car",
+      "amount": 904.87,
+      "category": "travel_other"
+    },
+    {
+      "date": "2026-07-10",
+      "merchant": "Hyatt Regency",
+      "amount": 870.69,
+      "category": "travel_hotels"
+    },
+    {
+      "date": "2026-07-12",
+      "merchant": "United Airlines",
+      "amount": 629.69,
+      "category": "travel_flights"
+    },
+    {
+      "date": "2026-07-28",
+      "merchant": "Stop & Shop",
+      "amount": 918.99,
+      "category": "groceries"
+    }
+  ]
+}

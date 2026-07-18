@@ -106,3 +106,17 @@ export const FLOATING_CARDS: FloatingCard[] = [
     delay: -7,
   },
 ];
+
+export type CarouselRowConfig = {
+  id: string;
+  direction: "left" | "right";
+  duration: number;
+  offset: number;
+};
+
+export const CAROUSEL_ROWS: CarouselRowConfig[] = [
+  { id: "row-1", direction: "left", duration: 48, offset: 0 },
+  { id: "row-2", direction: "right", duration: 56, offset: 2 },
+  { id: "row-3", direction: "left", duration: 52, offset: 4 },
+  { id: "row-4", direction: "right", duration: 60, offset: 1 },
+];

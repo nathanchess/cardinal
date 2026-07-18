@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-const outDir = "app/public/cards";
+const outDir = "public/cards";
 fs.mkdirSync(outDir, { recursive: true });
 
 const downloads = {
@@ -63,7 +63,7 @@ for (const [file, url] of Object.entries(downloads)) {
   }
 }
 
-// Existing / previously downloaded files
+// Merge any files already present in the output directory
 for (const file of fs.readdirSync(outDir)) {
   if (!/\.(png|jpe?g|webp)$/i.test(file)) continue;
   const id = file.replace(/\.(png|jpe?g|webp)$/i, "");
@@ -75,7 +75,7 @@ for (const file of fs.readdirSync(outDir)) {
 }
 
 fs.writeFileSync(
-  "app/src/data/card-art-map.json",
+  "data/card-art-map.json",
   JSON.stringify(map, null, 2),
 );
 console.log("map size", Object.keys(map).length);

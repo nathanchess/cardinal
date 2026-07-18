@@ -46,8 +46,57 @@ body {
   animation-iteration-count: infinite;
 }
 
+@keyframes marquee-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marquee-right {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-marquee-left {
+  animation-name: marquee-left;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.animate-marquee-right {
+  animation-name: marquee-right;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes statement-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -50%, 0);
+  }
+}
+
+.animate-statement-scroll {
+  animation-name: statement-scroll;
+  animation-duration: 78s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .animate-card-drift {
+  .animate-card-drift,
+  .animate-statement-scroll,
+  .animate-marquee-left,
+  .animate-marquee-right {
     animation: none !important;
   }
 }

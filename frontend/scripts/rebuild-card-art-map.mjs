@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-const outDir = "app/public/cards";
+const outDir = "public/cards";
 const map = {};
 
 const aliases = {
@@ -30,12 +30,12 @@ if (fs.existsSync(path.join(outDir, "capital-one-venture-x.png"))) {
 }
 
 fs.writeFileSync(
-  "app/src/data/card-art-map.json",
+  "data/card-art-map.json",
   JSON.stringify(map, null, 2) + "\n",
 );
 
 const catalog = JSON.parse(
-  fs.readFileSync("data/credit_cards.json", "utf8"),
+  fs.readFileSync("../data/credit_cards.json", "utf8"),
 ).cards;
 const covered = catalog.filter((c) => map[c.id]);
 const missing = catalog.filter((c) => !map[c.id]).map((c) => c.id);

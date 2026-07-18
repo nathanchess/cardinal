@@ -61,25 +61,26 @@ Animate nearly everything. Prefer Framer Motion + CSS keyframes.
 | Scroll reveals | Fade/slide when entering viewport (`whileInView`, once) |
 | Reduced motion | Honor `prefers-reduced-motion: reduce` — disable drift/marquees; keep instant opacity |
 
-Landing background (current): white page + floating issuer card art from `app/public/cards/`, soft opacity/rotation, behind content (`pointer-events: none`). Idle hover/drift only — not cursor-linked.
+Landing background (current): white page + floating issuer card art from `frontend/public/cards/`, soft opacity/rotation, behind content (`pointer-events: none`). Idle hover/drift only — not cursor-linked.
 
 ## Landing page contract
 
 1. Full-bleed first viewport
 2. Large logo + **Cardinal** wordmark
 3. CTA label exactly: **Find your perfect credit card** (with Lucide arrow icon) — no subtitle on the landing hero
-4. Real issuer card art from `app/public/cards/` floating in the background (idle drift)
+4. Real issuer card art from `frontend/public/cards/` floating in the background (idle drift)
 5. On CTA click (sequenced): cards push-in then fly out → short pause (brand stays put) → brand anticipates opposite (down-right) then glides to **top-left** (single fixed element, no opacity fade / remount) → persona picker
 6. Persona step: Duolingo-style flat characters for 3 sample personas + **Custom profile**; each persona shows **credit score** + varied **balance** on the statement; selecting reveals description + Chase-like auto-scrolling bank statement (category-colored tags) + **Connect bank account**
 7. On Connect: persona UI exits; logo stays top-left; bank connect screen (no page scroll) → then architecture demo: OpenAI embedding (PII redacted copy) → Redis 3D embedding cloud (live fetch) → user vector → glowing top-10 KNN → **View recommendations**
 
 ## File map
 
-- App root: `app/`
-- Routes: `app/src/app/`
-- Components: `app/src/components/`
-- Brand assets: `app/public/brand/`
-- Card art: `app/public/cards/`
+- App root: `frontend/`
+- Routes: `frontend/app/`
+- Components: `frontend/components/`
+- Brand assets: `frontend/public/brand/`
+- Card art: `frontend/public/cards/`
+- Bank logos: `frontend/public/banks/`
 
 ## Do / Don't
 

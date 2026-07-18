@@ -1,0 +1,269 @@
+{
+  "persona_id": "urban_diner",
+  "transactions": [
+    {
+      "date": "2025-08-04",
+      "merchant": "Sweetgreen",
+      "amount": 1080.14,
+      "category": "dining"
+    },
+    {
+      "date": "2025-08-06",
+      "merchant": "CVS Pharmacy",
+      "amount": 248.36,
+      "category": "drugstores"
+    },
+    {
+      "date": "2025-08-17",
+      "merchant": "Amazon Marketplace",
+      "amount": 719.41,
+      "category": "general"
+    },
+    {
+      "date": "2025-08-29",
+      "merchant": "Walmart",
+      "amount": 911.84,
+      "category": "general"
+    },
+    {
+      "date": "2025-09-03",
+      "merchant": "Walmart",
+      "amount": 743.97,
+      "category": "general"
+    },
+    {
+      "date": "2025-09-05",
+      "merchant": "Trader Joe's",
+      "amount": 574.3,
+      "category": "groceries"
+    },
+    {
+      "date": "2025-09-17",
+      "merchant": "Dos Toros",
+      "amount": 536.14,
+      "category": "dining"
+    },
+    {
+      "date": "2025-09-19",
+      "merchant": "Thai Villa",
+      "amount": 681.51,
+      "category": "dining"
+    },
+    {
+      "date": "2025-10-10",
+      "merchant": "Comcast Xfinity",
+      "amount": 611.24,
+      "category": "utilities"
+    },
+    {
+      "date": "2025-10-11",
+      "merchant": "Target.com",
+      "amount": 966.21,
+      "category": "online_shopping"
+    },
+    {
+      "date": "2025-10-13",
+      "merchant": "Best Buy Online",
+      "amount": 726.15,
+      "category": "online_shopping"
+    },
+    {
+      "date": "2025-10-18",
+      "merchant": "Equinox Fitness",
+      "amount": 462.86,
+      "category": "entertainment"
+    },
+    {
+      "date": "2025-10-19",
+      "merchant": "Joe's Pizza",
+      "amount": 580.13,
+      "category": "dining"
+    },
+    {
+      "date": "2025-10-23",
+      "merchant": "Key Food",
+      "amount": 746.12,
+      "category": "groceries"
+    },
+    {
+      "date": "2025-10-23",
+      "merchant": "JetBlue",
+      "amount": 901.34,
+      "category": "travel_flights"
+    },
+    {
+      "date": "2025-11-21",
+      "merchant": "Chipotle",
+      "amount": 724.92,
+      "category": "dining"
+    },
+    {
+      "date": "2025-11-28",
+      "merchant": "Trader Joe's",
+      "amount": 696.45,
+      "category": "groceries"
+    },
+    {
+      "date": "2025-12-14",
+      "merchant": "Le Coucou",
+      "amount": 533.63,
+      "category": "dining"
+    },
+    {
+      "date": "2025-12-27",
+      "merchant": "Trader Joe's",
+      "amount": 540.9,
+      "category": "groceries"
+    },
+    {
+      "date": "2026-01-20",
+      "merchant": "Shake Shack",
+      "amount": 838.0,
+      "category": "dining"
+    },
+    {
+      "date": "2026-01-22",
+      "merchant": "Blue Bottle Coffee",
+      "amount": 1200.0,
+      "category": "dining"
+    },
+    {
+      "date": "2026-01-24",
+      "merchant": "Via Carota",
+      "amount": 902.23,
+      "category": "dining"
+    },
+    {
+      "date": "2026-01-29",
+      "merchant": "Whole Foods Market",
+      "amount": 623.24,
+      "category": "groceries"
+    },
+    {
+      "date": "2026-02-11",
+      "merchant": "Key Food",
+      "amount": 939.86,
+      "category": "groceries"
+    },
+    {
+      "date": "2026-02-11",
+      "merchant": "American Airlines",
+      "amount": 492.7,
+      "category": "travel_flights"
+    },
+    {
+      "date": "2026-02-22",
+      "merchant": "Amazon Marketplace",
+      "amount": 673.68,
+      "category": "general"
+    },
+    {
+      "date": "2026-03-21",
+      "merchant": "Key Food",
+      "amount": 1126.2,
+      "category": "groceries"
+    },
+    {
+      "date": "2026-03-24",
+      "merchant": "The Smith",
+      "amount": 666.26,
+      "category": "dining"
+    },
+    {
+      "date": "2026-04-10",
+      "merchant": "Con Edison",
+      "amount": 988.76,
+      "category": "utilities"
+    },
+    {
+      "date": "2026-04-28",
+      "merchant": "Hulu",
+      "amount": 290.74,
+      "category": "streaming"
+    },
+    {
+      "date": "2026-05-01",
+      "merchant": "United Airlines",
+      "amount": 913.54,
+      "category": "travel_flights"
+    },
+    {
+      "date": "2026-05-07",
+      "merchant": "Dos Toros",
+      "amount": 532.45,
+      "category": "dining"
+    },
+    {
+      "date": "2026-05-18",
+      "merchant": "Amazon Marketplace",
+      "amount": 831.1,
+      "category": "general"
+    },
+    {
+      "date": "2026-05-26",
+      "merchant": "Exxon",
+      "amount": 737.03,
+      "category": "gas"
+    },
+    {
+      "date": "2026-05-27",
+      "merchant": "Exxon",
+      "amount": 862.97,
+      "category": "gas"
+    },
+    {
+      "date": "2026-05-29",
+      "merchant": "Blue Bottle Coffee",
+      "amount": 685.03,
+      "category": "dining"
+    },
+    {
+      "date": "2026-06-02",
+      "merchant": "Disney+",
+      "amount": 349.26,
+      "category": "streaming"
+    },
+    {
+      "date": "2026-06-22",
+      "merchant": "United Airlines",
+      "amount": 892.42,
+      "category": "travel_flights"
+    },
+    {
+      "date": "2026-06-26",
+      "merchant": "Etsy",
+      "amount": 547.64,
+      "category": "online_shopping"
+    },
+    {
+      "date": "2026-06-29",
+      "merchant": "Uber Eats",
+      "amount": 1005.43,
+      "category": "dining"
+    },
+    {
+      "date": "2026-07-05",
+      "merchant": "Whole Foods Market",
+      "amount": 1152.93,
+      "category": "groceries"
+    },
+    {
+      "date": "2026-07-15",
+      "merchant": "Peloton",
+      "amount": 497.14,
+      "category": "entertainment"
+    },
+    {
+      "date": "2026-07-16",
+      "merchant": "Rite Aid",
+      "amount": 231.64,
+      "category": "drugstores"
+    },
+    {
+      "date": "2026-07-24",
+      "merchant": "Dos Toros",
+      "amount": 1034.13,
+      "category": "dining"
+    }
+  ]
+}

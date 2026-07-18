@@ -2,7 +2,7 @@
 
 Spend-aware credit card matching.
 
-[Repository](https://github.com/nathanchess/cardinal)
+![Cardinal thumbnail](thumbnail.png)
 
 ## Short description
 

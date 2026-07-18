@@ -1,16 +1,16 @@
 ---
 name: cardinal-ui
-description: Cardinal product UI design system — Notion-like black/white aesthetic, Georgia wordmark + Source Sans 3 UI type, Lucide icons only (no emojis), and motion rules for the Next.js app. Use when building or editing anything under app/, landing pages, components, styles, or Cardinal frontend UX.
+description: Cardinal product UI design system — Notion-like black/white aesthetic, Georgia wordmark + Source Sans 3 UI type, Lucide icons only (no emojis), and motion rules for the Next.js app. Use when building or editing anything under frontend/, landing pages, components, styles, or Cardinal frontend UX.
 ---
 
 # Cardinal UI
 
-Project-local design system for the Next.js frontend in `app/`.
+Project-local design system for the Next.js frontend in `frontend/`.
 
 ## Brand
 
 - Product name: **Cardinal**
-- Logo: `app/public/brand/cardinal-logo.jpg` (voxel bird + card, monochrome)
+- Logo: `frontend/public/brand/cardinal-logo.jpg` (voxel bird + card, monochrome)
 - First-viewport hero: logo (large) + wordmark **Cardinal** beside it + one CTA. Keep chrome sparse.
 
 ## Visual system

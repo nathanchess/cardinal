@@ -482,7 +482,7 @@
           "People seeking different category strengths"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: travel_redemption | maximize_rewards | minimize_fees\nreward_style: fixed_value_points\nfee_tier: zero\ncategory_profile: dining=high; travel_other=high; drugstores=high; general=base\nbooking_channels: chase_travel\nloyalty_programs: ultimate_rewards\nbenefit_profile: trip_protection | purchase_protection | warranty_protection\nlifestyle_tags: diner | general_traveler\nsummary: Best for travel_other, dining, drugstores.",
+      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: simple_cashback | maximize_rewards | minimize_fees\nreward_style: cashback\nfee_tier: zero\ncategory_profile: dining=high; travel_other=high; drugstores=high; general=base\nbooking_channels: chase_travel\nloyalty_programs: ultimate_rewards\nbenefit_profile: trip_protection | purchase_protection | warranty_protection\nlifestyle_tags: diner | general_traveler\nsummary: Best for travel_other, dining, drugstores.",
       "official_url": "https://creditcards.chase.com/cash-back-credit-cards/freedom/unlimited",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": []
@@ -600,7 +600,7 @@
           "People seeking different category strengths"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: travel_redemption | maximize_rewards | minimize_fees\nreward_style: fixed_value_points\nfee_tier: zero\ncategory_profile: dining=high; groceries=high; gas=high; transit=high; travel_other=high; streaming=high; drugstores=high; online_shopping=high; general=base\nbooking_channels: chase_travel\nloyalty_programs: ultimate_rewards\nbenefit_profile: purchase_protection | warranty_protection\nlifestyle_tags: diner | grocery_shopper | driver | commuter | general_traveler | streamer | online_shopper\nsummary: Best for dining, groceries, gas, transit, streaming, drugstores, online_shopping, travel_other.",
+      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: simple_cashback | maximize_rewards | minimize_fees\nreward_style: cashback | flexible_categories\nfee_tier: zero\ncategory_profile: dining=high; travel_other=high; drugstores=high; general=base\nbooking_channels: chase_travel\nloyalty_programs: ultimate_rewards\nbenefit_profile: purchase_protection | warranty_protection\nlifestyle_tags: diner | general_traveler | category_optimizer\nsummary: Best for travel_other, dining, drugstores.",
       "official_url": "https://creditcards.chase.com/cash-back-credit-cards/freedom/flex",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": []
@@ -1105,7 +1105,7 @@
           "People who cannot offset the annual fee with evergreen benefits"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: maximize_rewards\nreward_style: fixed_value_points\nfee_tier: low\ncategory_profile: groceries=high; gas=high; transit=high; streaming=high; general=base\nbenefit_profile: purchase_protection | warranty_protection\nlifestyle_tags: grocery_shopper | driver | commuter | streamer\nsummary: Best for groceries, streaming, transit, gas.",
+      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: simple_cashback | maximize_rewards\nreward_style: cashback\nfee_tier: low\ncategory_profile: groceries=high; gas=high; transit=high; streaming=high; general=base\nbenefit_profile: purchase_protection | warranty_protection\nlifestyle_tags: grocery_shopper | driver | commuter | streamer\nsummary: Best for groceries, streaming, transit, gas.",
       "official_url": "https://www.americanexpress.com/us/credit-cards/card/blue-cash-preferred/",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": [
@@ -1222,7 +1222,7 @@
           "People seeking different category strengths"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: maximize_rewards | minimize_fees\nreward_style: fixed_value_points\nfee_tier: zero\ncategory_profile: groceries=high; gas=high; online_shopping=high; general=base\nbenefit_profile: purchase_protection\nlifestyle_tags: grocery_shopper | driver | online_shopper\nsummary: Best for groceries, online_shopping, gas.",
+      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: simple_cashback | maximize_rewards | minimize_fees\nreward_style: cashback\nfee_tier: zero\ncategory_profile: groceries=high; gas=high; online_shopping=high; general=base\nbenefit_profile: purchase_protection\nlifestyle_tags: grocery_shopper | driver | online_shopper\nsummary: Best for groceries, online_shopping, gas.",
       "official_url": "https://www.americanexpress.com/us/credit-cards/card/blue-cash-everyday/",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": []
@@ -1364,7 +1364,7 @@
           "People who cannot offset the annual fee with evergreen benefits"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: travel_redemption | airline_loyalty | maximize_rewards\nreward_style: transferable_points | airline_miles\nfee_tier: high\ncategory_profile: travel_flights=high; travel_hotels=high; travel_other=high; general=medium\nforeign_transaction_fees: waived\nbooking_channels: capital_one_travel\nloyalty_programs: capital_one_miles\nbenefit_profile: travel_credit | global_entry_credit | tsa_precheck_credit | lounge_access | cell_phone_protection | rental_car_protection\nlifestyle_tags: flyer | hotel_traveler | general_traveler\nsummary: Best for general, travel_hotels, travel_other, travel_flights.",
+      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: travel_redemption | airline_loyalty | maximize_rewards\nreward_style: transferable_points | airline_miles\nfee_tier: high\ncategory_profile: travel_flights=high; travel_hotels=high; travel_other=high; general=medium\nforeign_transaction_fees: waived\nbooking_channels: capital_one_travel\nloyalty_programs: capital_one_miles\nbenefit_profile: travel_credit | global_entry_credit | tsa_precheck_credit | lounge_access | cell_phone_protection\nlifestyle_tags: flyer | hotel_traveler | general_traveler\nsummary: Best for general, travel_hotels, travel_other, travel_flights.",
       "official_url": "https://www.capitalone.com/credit-cards/venture-x/",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": [
@@ -1947,7 +1947,7 @@
           "People seeking different category strengths"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: minimize_fees\nreward_style: fixed_value_points\nfee_tier: zero\ncategory_profile: general=base\nloyalty_programs: thankyou_rewards\nbenefit_profile: warranty_protection\nsummary: Best for general everyday spending.",
+      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: simple_cashback | minimize_fees\nreward_style: cashback\nfee_tier: zero\ncategory_profile: general=base\nloyalty_programs: thankyou_rewards\nbenefit_profile: warranty_protection\nsummary: Best for general everyday spending.",
       "official_url": "https://www.citi.com/credit-cards/citi-double-cash-credit-card",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": [
@@ -2029,7 +2029,7 @@
           "People seeking different category strengths"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: maximize_rewards | minimize_fees\nreward_style: fixed_value_points\nfee_tier: zero\ncategory_profile: dining=high; groceries=high; gas=high; transit=high; streaming=high; drugstores=high; online_shopping=high; general=base\nloyalty_programs: thankyou_rewards\nlifestyle_tags: diner | grocery_shopper | driver | commuter | streamer | online_shopper\nsummary: Best for dining, groceries, gas, transit, streaming, drugstores, online_shopping.",
+      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: simple_cashback | maximize_rewards | minimize_fees\nreward_style: cashback | flexible_categories\nfee_tier: zero\ncategory_profile: general=base\nloyalty_programs: thankyou_rewards\nlifestyle_tags: category_optimizer\nsummary: Best for rotating or selectable bonus categories.",
       "official_url": "https://www.citi.com/credit-cards/citi-custom-cash-credit-card",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": []
@@ -2249,7 +2249,7 @@
           "People seeking different category strengths"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: simple_cashback | maximize_rewards | minimize_fees\nreward_style: cashback\nfee_tier: zero\ncategory_profile: general=medium\nloyalty_programs: wells_fargo_rewards\nbenefit_profile: cell_phone_protection | rental_car_protection\nsummary: Best for general.",
+      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: simple_cashback | minimize_fees\nreward_style: cashback\nfee_tier: zero\ncategory_profile: general=medium\nloyalty_programs: wells_fargo_rewards\nbenefit_profile: cell_phone_protection | rental_car_protection\nsummary: Best for general.",
       "official_url": "https://creditcards.wellsfargo.com/active-cash-credit-card/",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": [
@@ -2381,7 +2381,7 @@
           "People seeking different category strengths"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: travel_redemption | maximize_rewards | minimize_fees\nreward_style: transferable_points\nfee_tier: zero\ncategory_profile: dining=medium; travel_other=medium; general=base\nforeign_transaction_fees: waived\nloyalty_programs: bilt_rewards\nbenefit_profile: hotel_credit | lounge_access | trip_protection | warranty_protection\nlifestyle_tags: diner | general_traveler\nsummary: Best for dining, travel_other.",
+      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: travel_redemption | maximize_rewards | minimize_fees\nreward_style: transferable_points\nfee_tier: zero\ncategory_profile: dining=medium; travel_other=medium; general=base\nforeign_transaction_fees: waived\nloyalty_programs: bilt_rewards\nbenefit_profile: lounge_access | trip_protection | warranty_protection\nlifestyle_tags: diner | general_traveler\nsummary: Best for dining, travel_other.",
       "official_url": "https://www.biltrewards.com/card",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": [
@@ -2466,7 +2466,7 @@
           "People seeking different category strengths"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: simple_cashback | maximize_rewards | minimize_fees\nreward_style: cashback\nfee_tier: zero\ncategory_profile: dining=high; groceries=high; gas=high; transit=high; streaming=high; drugstores=high; online_shopping=high; general=base\nforeign_transaction_fees: waived\nloyalty_programs: discover_cashback\nlifestyle_tags: diner | grocery_shopper | driver | commuter | streamer | online_shopper\nsummary: Best for dining, groceries, gas, transit, streaming, drugstores, online_shopping.",
+      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: simple_cashback | maximize_rewards | minimize_fees\nreward_style: cashback | flexible_categories\nfee_tier: zero\ncategory_profile: general=base\nforeign_transaction_fees: waived\nloyalty_programs: discover_cashback\nlifestyle_tags: category_optimizer\nsummary: Best for rotating or selectable bonus categories.",
       "official_url": "https://www.discover.com/credit-cards/cash-back/it-card.html",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": []
@@ -2667,7 +2667,7 @@
           "People seeking different category strengths"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: minimize_fees\nreward_style: no_rewards\nfee_tier: zero\ncategory_profile: general=base\nbenefit_profile: purchase_protection | warranty_protection\nsummary: Best for general everyday spending.",
+      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: simple_cashback | minimize_fees\nreward_style: cashback\nfee_tier: zero\ncategory_profile: general=base\nbenefit_profile: purchase_protection | warranty_protection\nsummary: Best for general everyday spending.",
       "official_url": "https://creditcards.chase.com/balance-transfer-credit-cards/slate/edge",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": []
@@ -2881,7 +2881,7 @@
           "People seeking different category strengths"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: small_business\nprimary_goals: maximize_rewards | minimize_fees | business_rewards\nreward_style: fixed_value_points\nfee_tier: zero\ncategory_profile: dining=medium; gas=medium; utilities=high; general=base\nloyalty_programs: ultimate_rewards\nbenefit_profile: purchase_protection | warranty_protection\nlifestyle_tags: diner | driver | business_owner\nsummary: Best for utilities, dining, gas.",
+      "embedding_text": "CARD_PERSONA\naudience: small_business\nprimary_goals: simple_cashback | maximize_rewards | minimize_fees | business_rewards\nreward_style: cashback\nfee_tier: zero\ncategory_profile: dining=medium; gas=medium; utilities=high; general=base\nloyalty_programs: ultimate_rewards\nbenefit_profile: purchase_protection | warranty_protection\nlifestyle_tags: diner | driver | business_owner\nsummary: Best for utilities, dining, gas.",
       "official_url": "https://creditcards.chase.com/business-credit-cards/ink/cash",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": []
@@ -2974,7 +2974,7 @@
           "People seeking different category strengths"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: small_business\nprimary_goals: minimize_fees | business_rewards\nreward_style: fixed_value_points\nfee_tier: zero\ncategory_profile: general=base\nloyalty_programs: ultimate_rewards\nbenefit_profile: purchase_protection | warranty_protection\nlifestyle_tags: business_owner\nsummary: Best for general everyday spending.",
+      "embedding_text": "CARD_PERSONA\naudience: small_business\nprimary_goals: simple_cashback | minimize_fees | business_rewards\nreward_style: cashback\nfee_tier: zero\ncategory_profile: general=base\nloyalty_programs: ultimate_rewards\nbenefit_profile: purchase_protection | warranty_protection\nlifestyle_tags: business_owner\nsummary: Best for general everyday spending.",
       "official_url": "https://creditcards.chase.com/business-credit-cards/ink/unlimited",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": []
@@ -3281,7 +3281,7 @@
           "People who cannot offset the annual fee with evergreen benefits"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: travel_redemption | airline_loyalty | maximize_rewards\nreward_style: airline_miles\nfee_tier: high\ncategory_profile: dining=medium; travel_flights=medium; travel_other=medium; streaming=medium; general=base\nforeign_transaction_fees: waived\nbooking_channels: airline_cobrand\nloyalty_programs: united_mileageplus\nbenefit_profile: travel_credit | global_entry_credit | tsa_precheck_credit | checked_bag | priority_boarding | trip_protection | purchase_protection | warranty_protection\nlifestyle_tags: diner | flyer | general_traveler | streamer\nsummary: Best for travel_flights, travel_other, dining, streaming.",
+      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: travel_redemption | airline_loyalty | maximize_rewards\nreward_style: airline_miles\nfee_tier: high\ncategory_profile: dining=medium; travel_flights=medium; travel_other=medium; streaming=medium; general=base\nforeign_transaction_fees: waived\nbooking_channels: airline_cobrand\nloyalty_programs: united_mileageplus\nbenefit_profile: travel_credit | global_entry_credit | tsa_precheck_credit | trip_protection | purchase_protection | warranty_protection\nlifestyle_tags: diner | flyer | general_traveler | streamer\nsummary: Best for travel_flights, travel_other, dining, streaming.",
       "official_url": "https://creditcards.chase.com/travel-credit-cards/united/united-quest",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": []
@@ -5342,7 +5342,7 @@
           "People who cannot offset the annual fee with evergreen benefits"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: travel_redemption | airline_loyalty | maximize_rewards | premium_benefits\nreward_style: airline_miles\nfee_tier: premium\ncategory_profile: travel_flights=medium; general=base\nforeign_transaction_fees: waived\nbooking_channels: airline_cobrand\nloyalty_programs: delta_skymiles\nbenefit_profile: dining_credit | global_entry_credit | tsa_precheck_credit | checked_bag | companion_pass | trip_protection | purchase_protection | warranty_protection | cell_phone_protection | rental_car_protection\nlifestyle_tags: flyer\nsummary: Best for travel_flights.",
+      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: travel_redemption | airline_loyalty | premium_benefits\nreward_style: airline_miles\nfee_tier: premium\ncategory_profile: travel_flights=medium; general=base\nforeign_transaction_fees: waived\nbooking_channels: airline_cobrand\nloyalty_programs: delta_skymiles\nbenefit_profile: dining_credit | global_entry_credit | tsa_precheck_credit | checked_bag | companion_pass | trip_protection | purchase_protection | warranty_protection | cell_phone_protection\nlifestyle_tags: flyer\nsummary: Best for travel_flights.",
       "official_url": "https://www.americanexpress.com/us/credit-cards/card/delta-skymiles-reserve-american-express-card/",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": [
@@ -5451,7 +5451,7 @@
           "People seeking different category strengths"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: small_business\nprimary_goals: travel_redemption | maximize_rewards | minimize_fees | business_rewards\nreward_style: transferable_points\nfee_tier: zero\ncategory_profile: general=medium\nloyalty_programs: membership_rewards\nbenefit_profile: lounge_access | purchase_protection | warranty_protection\nlifestyle_tags: business_owner\nsummary: Best for general.",
+      "embedding_text": "CARD_PERSONA\naudience: small_business\nprimary_goals: travel_redemption | minimize_fees | business_rewards\nreward_style: transferable_points\nfee_tier: zero\ncategory_profile: general=medium\nloyalty_programs: membership_rewards\nbenefit_profile: lounge_access | purchase_protection | warranty_protection\nlifestyle_tags: business_owner\nsummary: Best for general.",
       "official_url": "https://www.americanexpress.com/us/credit-cards/business/business-credit-cards/american-express-blue-business-plus-credit-card-amex/",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": []
@@ -5610,7 +5610,7 @@
           "People who cannot offset the annual fee with evergreen benefits"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: small_business\nprimary_goals: travel_redemption | maximize_rewards | business_rewards\nreward_style: transferable_points\nfee_tier: high\ncategory_profile: dining=high; groceries=high; gas=high; transit=high; travel_flights=medium; travel_hotels=medium; streaming=high; drugstores=high; online_shopping=high; general=base\nforeign_transaction_fees: waived\nbooking_channels: amex_travel\nloyalty_programs: membership_rewards\nbenefit_profile: lounge_access | trip_protection | purchase_protection | warranty_protection | cell_phone_protection\nlifestyle_tags: diner | grocery_shopper | driver | commuter | flyer | hotel_traveler | streamer | online_shopper | business_owner\nsummary: Best for dining, groceries, gas, transit, streaming, drugstores, online_shopping, travel_flights, travel_hotels.",
+      "embedding_text": "CARD_PERSONA\naudience: small_business\nprimary_goals: travel_redemption | maximize_rewards | business_rewards\nreward_style: transferable_points | flexible_categories\nfee_tier: high\ncategory_profile: travel_flights=medium; travel_hotels=medium; general=base\nforeign_transaction_fees: waived\nbooking_channels: amex_travel\nloyalty_programs: membership_rewards\nbenefit_profile: lounge_access | trip_protection | purchase_protection | warranty_protection | cell_phone_protection\nlifestyle_tags: flyer | hotel_traveler | business_owner | category_optimizer\nsummary: Best for travel_flights, travel_hotels.",
       "official_url": "https://www.americanexpress.com/us/credit-cards/business/business-credit-cards/american-express-business-gold-card-amex/",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": [
@@ -6108,7 +6108,7 @@
           "People who cannot offset the annual fee with evergreen benefits"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: small_business\nprimary_goals: travel_redemption | simple_cashback | maximize_rewards | business_rewards\nreward_style: cashback\nfee_tier: mid\ncategory_profile: travel_hotels=high; travel_other=high; general=medium\nforeign_transaction_fees: waived\nbooking_channels: capital_one_travel\nbenefit_profile: travel_credit | warranty_protection\nlifestyle_tags: hotel_traveler | general_traveler | business_owner\nsummary: Best for general, travel_hotels, travel_other.",
+      "embedding_text": "CARD_PERSONA\naudience: small_business\nprimary_goals: travel_redemption | simple_cashback | maximize_rewards | business_rewards\nreward_style: cashback\nfee_tier: mid\ncategory_profile: travel_hotels=high; travel_other=high; general=medium\nforeign_transaction_fees: waived\nbooking_channels: capital_one_travel\nbenefit_profile: warranty_protection\nlifestyle_tags: hotel_traveler | general_traveler | business_owner\nsummary: Best for general, travel_hotels, travel_other.",
       "official_url": "https://www.capitalone.com/small-business/credit-cards/spark-cash-plus/",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": [
@@ -6814,7 +6814,7 @@
           "People seeking different category strengths"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: minimize_fees\nreward_style: no_rewards\nfee_tier: zero\ncategory_profile: general=base\nloyalty_programs: wells_fargo_rewards\nbenefit_profile: cell_phone_protection\nsummary: Best for general everyday spending.",
+      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: simple_cashback | minimize_fees\nreward_style: cashback\nfee_tier: zero\ncategory_profile: general=base\nloyalty_programs: wells_fargo_rewards\nbenefit_profile: cell_phone_protection\nsummary: Best for general everyday spending.",
       "official_url": "https://creditcards.wellsfargo.com/reflect-visa-credit-card/",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": []
@@ -6893,7 +6893,7 @@
           "People seeking different category strengths"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: maximize_rewards | minimize_fees\nreward_style: fixed_value_points\nfee_tier: zero\ncategory_profile: gas=high; transit=high; entertainment=high; general=base\nloyalty_programs: wells_fargo_rewards\nlifestyle_tags: driver | commuter\nsummary: Best for gas, transit, entertainment.",
+      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: simple_cashback | maximize_rewards | minimize_fees\nreward_style: cashback\nfee_tier: zero\ncategory_profile: gas=high; transit=high; entertainment=high; general=base\nloyalty_programs: wells_fargo_rewards\nlifestyle_tags: driver | commuter\nsummary: Best for gas, transit, entertainment.",
       "official_url": "https://creditcards.wellsfargo.com/attune-credit-card/",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": []
@@ -7212,7 +7212,7 @@
           "People seeking different category strengths"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: travel_redemption | simple_cashback | maximize_rewards | minimize_fees\nreward_style: cashback\nfee_tier: zero\ncategory_profile: dining=high; groceries=high; gas=high; transit=high; travel_hotels=high; travel_other=high; streaming=high; drugstores=high; online_shopping=high; general=base\nlifestyle_tags: diner | grocery_shopper | driver | commuter | hotel_traveler | general_traveler | streamer | online_shopper\nsummary: Best for dining, groceries, gas, transit, streaming, drugstores, online_shopping, travel_hotels, travel_other.",
+      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: travel_redemption | simple_cashback | maximize_rewards | minimize_fees\nreward_style: cashback | flexible_categories\nfee_tier: zero\ncategory_profile: travel_hotels=high; travel_other=high; general=base\nlifestyle_tags: hotel_traveler | general_traveler | category_optimizer\nsummary: Best for travel_hotels, travel_other.",
       "official_url": "https://www.usbank.com/credit-cards/cash-plus-visa-signature-credit-card.html",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": []
@@ -7314,7 +7314,7 @@
           "People who cannot offset the annual fee with evergreen benefits"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: simple_cashback | maximize_rewards\nreward_style: cashback\nfee_tier: low\ncategory_profile: dining=high; groceries=high; gas=high; transit=high; streaming=high; drugstores=high; online_shopping=high; general=base\nlifestyle_tags: diner | grocery_shopper | driver | commuter | streamer | online_shopper\nsummary: Best for dining, groceries, gas, transit, streaming, drugstores, online_shopping.",
+      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: simple_cashback | maximize_rewards\nreward_style: cashback | flexible_categories\nfee_tier: low\ncategory_profile: general=base\nlifestyle_tags: category_optimizer\nsummary: Best for rotating or selectable bonus categories.",
       "official_url": "https://www.usbank.com/credit-cards/shopper-cash-rewards-visa-signature-credit-card.html",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": [
@@ -7407,7 +7407,7 @@
           "People seeking different category strengths"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: simple_cashback | maximize_rewards | minimize_fees\nreward_style: cashback\nfee_tier: zero\ncategory_profile: general=high\nsummary: Best for general.",
+      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: simple_cashback | minimize_fees\nreward_style: cashback\nfee_tier: zero\ncategory_profile: general=high\nsummary: Best for general.",
       "official_url": "https://www.usbank.com/credit-cards/bank-smartly-visa-signature-credit-card.html",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": []
@@ -7498,7 +7498,7 @@
           "People seeking different category strengths"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: simple_cashback | maximize_rewards | minimize_fees\nreward_style: cashback\nfee_tier: zero\ncategory_profile: dining=high; groceries=high; gas=high; transit=high; streaming=high; drugstores=high; online_shopping=high; wholesale_clubs=medium; general=base\nlifestyle_tags: diner | grocery_shopper | driver | commuter | streamer | online_shopper\nsummary: Best for dining, groceries, gas, transit, streaming, drugstores, online_shopping, wholesale_clubs.",
+      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: simple_cashback | maximize_rewards | minimize_fees\nreward_style: cashback | flexible_categories\nfee_tier: zero\ncategory_profile: groceries=medium; wholesale_clubs=medium; general=base\nlifestyle_tags: grocery_shopper | category_optimizer\nsummary: Best for wholesale_clubs, groceries.",
       "official_url": "https://www.bankofamerica.com/credit-cards/products/cash-back-credit-card/",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": [
@@ -7679,7 +7679,7 @@
           "People who cannot offset the annual fee with evergreen benefits"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: travel_redemption | maximize_rewards\nreward_style: fixed_value_points\nfee_tier: low\ncategory_profile: dining=medium; travel_other=medium; general=base\nforeign_transaction_fees: waived\nloyalty_programs: premium_rewards\nbenefit_profile: global_entry_credit | tsa_precheck_credit | lounge_access | trip_protection | purchase_protection | rental_car_protection\nlifestyle_tags: diner | general_traveler\nsummary: Best for dining, travel_other.",
+      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: maximize_rewards\nreward_style: fixed_value_points\nfee_tier: low\ncategory_profile: dining=medium; travel_other=medium; general=base\nforeign_transaction_fees: waived\nloyalty_programs: premium_rewards\nbenefit_profile: global_entry_credit | tsa_precheck_credit | lounge_access | trip_protection | purchase_protection | rental_car_protection\nlifestyle_tags: diner | general_traveler\nsummary: Best for dining, travel_other.",
       "official_url": "https://www.bankofamerica.com/credit-cards/products/premium-rewards-credit-card/",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": [
@@ -7791,7 +7791,7 @@
           "People who cannot offset the annual fee with evergreen benefits"
         ]
       },
-      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: travel_redemption | maximize_rewards | premium_benefits\nreward_style: fixed_value_points\nfee_tier: premium\ncategory_profile: dining=medium; travel_other=medium; general=base\nforeign_transaction_fees: waived\nloyalty_programs: premium_rewards\nbenefit_profile: global_entry_credit | tsa_precheck_credit | lounge_access | trip_protection\nlifestyle_tags: diner | general_traveler\nsummary: Best for dining, travel_other.",
+      "embedding_text": "CARD_PERSONA\naudience: consumer\nprimary_goals: maximize_rewards | premium_benefits\nreward_style: fixed_value_points\nfee_tier: premium\ncategory_profile: dining=medium; travel_other=medium; general=base\nforeign_transaction_fees: waived\nloyalty_programs: premium_rewards\nbenefit_profile: global_entry_credit | tsa_precheck_credit | lounge_access | trip_protection\nlifestyle_tags: diner | general_traveler\nsummary: Best for dining, travel_other.",
       "official_url": "https://www.bankofamerica.com/credit-cards/products/premium-rewards-elite-credit-card/",
       "verified_as_of": "2026-07-18",
       "data_quality_notes": [

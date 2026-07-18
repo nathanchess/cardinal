@@ -7,7 +7,6 @@ from preprocess.taxonomy import (
     CATEGORIES,
     CHANNEL_TOKENS,
     FLEXIBLE_CATEGORY_MARKERS,
-    FLEXIBLE_TARGETS,
     LIFESTYLE_TAGS,
     PROGRAM_TOKENS,
     fee_tier,
@@ -18,17 +17,28 @@ from preprocess.taxonomy import (
 )
 
 
+def _has_flexible_earn(card: dict) -> bool:
+    return any(
+        any(marker in earn_rate["category"].lower() for marker in FLEXIBLE_CATEGORY_MARKERS)
+        for earn_rate in card["earn_rates"]
+    )
+
+
 def card_category_profile(card: dict) -> dict[str, str]:
+    """Category strengths for embedding recall.
+
+    Rotating/flexible bonus lines are intentionally not expanded onto every
+    FLEXIBLE_TARGETS category here (that inflated Discover/Freedom Flex into
+    "good at everything"). Flexible behavior is signaled via reward_style
+    instead; the rewards calculator still expands those lines for dollar math.
+    """
     profile: dict[str, str] = {}
     for earn_rate in card["earn_rates"]:
         intensity = reward_intensity(float(earn_rate["rate"]), earn_rate["unit"])
         label = earn_rate["category"].lower()
-        categories = (
-            FLEXIBLE_TARGETS
-            if any(marker in label for marker in FLEXIBLE_CATEGORY_MARKERS)
-            else map_categories(label)
-        )
-        for category in categories:
+        if any(marker in label for marker in FLEXIBLE_CATEGORY_MARKERS):
+            continue
+        for category in map_categories(label):
             profile[category] = stronger(profile.get(category, "base"), intensity)
     return profile
 
@@ -36,10 +46,15 @@ def card_category_profile(card: dict) -> dict[str, str]:
 def card_reward_styles(card: dict) -> list[str]:
     currency = (card.get("reward_currency") or "").lower()
     program = (card.get("rewards_program") or "").lower()
+    units = {earn_rate["unit"] for earn_rate in card["earn_rates"]}
     styles: list[str] = []
     if card["transfer_partners"]:
         styles.append("transferable_points")
-    if "cash" in currency:
+    if (
+        "percent_cashback" in units
+        or "cash" in currency
+        or "reward dollar" in currency
+    ):
         styles.append("cashback")
     if any(token in program for token in ("hilton", "marriott", "hyatt", "ihg", "choice")):
         styles.append("hotel_points")
@@ -56,6 +71,8 @@ def card_reward_styles(card: dict) -> list[str]:
         )
     ) or currency == "miles":
         styles.append("airline_miles")
+    if _has_flexible_earn(card):
+        styles.append("flexible_categories")
     if not styles and currency in {"points", "reward dollars"}:
         styles.append("fixed_value_points")
     if not styles and not currency:
@@ -65,17 +82,33 @@ def card_reward_styles(card: dict) -> list[str]:
 
 def card_goals(card: dict, profile: dict[str, str], styles: list[str]) -> list[str]:
     goals: list[str] = []
-    if "transferable_points" in styles or any(
-        category.startswith("travel_") for category in profile
+    travel_core = any(
+        profile.get(category) in {"medium", "high"}
+        for category in ("travel_flights", "travel_hotels")
+    )
+    if (
+        "transferable_points" in styles
+        or "airline_miles" in styles
+        or "hotel_points" in styles
+        or travel_core
     ):
         goals.append("travel_redemption")
     if "airline_miles" in styles:
         goals.append("airline_loyalty")
     if "hotel_points" in styles:
         goals.append("hotel_loyalty")
-    if "cashback" in styles:
+    if "cashback" in styles and "transferable_points" not in styles:
         goals.append("simple_cashback")
-    if any(intensity in {"medium", "high"} for intensity in profile.values()):
+    strong_non_general = [
+        intensity
+        for category, intensity in profile.items()
+        if category != "general" and intensity in {"medium", "high"}
+    ]
+    if (
+        "flexible_categories" in styles
+        or any(intensity == "high" for intensity in strong_non_general)
+        or len(strong_non_general) >= 2
+    ):
         goals.append("maximize_rewards")
     if card["annual_fee_usd"] == 0:
         goals.append("minimize_fees")
@@ -84,7 +117,6 @@ def card_goals(card: dict, profile: dict[str, str], styles: list[str]) -> list[s
     if card.get("audience") == "small_business":
         goals.append("business_rewards")
     return list(dict.fromkeys(goals)) or ["maximize_rewards"]
-
 
 def card_booking_channels(card: dict) -> list[str]:
     text = " ".join(
@@ -142,6 +174,8 @@ def render_card_persona(card: dict) -> str:
     ]
     if card.get("audience") == "small_business":
         lifestyle.append("business_owner")
+    if "flexible_categories" in styles:
+        lifestyle.append("category_optimizer")
     strongest = [
         category
         for category, intensity in profile.items()
@@ -166,13 +200,14 @@ def render_card_persona(card: dict) -> str:
         lines.append(f"benefit_profile: {join_values(benefits)}")
     if lifestyle:
         lines.append(f"lifestyle_tags: {join_values(lifestyle)}")
-    lines.append(
-        "summary: Best for "
-        + (", ".join(strongest) if strongest else "general everyday spending")
-        + "."
-    )
+    if strongest:
+        summary = "Best for " + ", ".join(strongest) + "."
+    elif "flexible_categories" in styles:
+        summary = "Best for rotating or selectable bonus categories."
+    else:
+        summary = "Best for general everyday spending."
+    lines.append(f"summary: {summary}")
     return "\n".join(lines)
-
 
 def render_user_persona(profile: dict) -> str:
     category_profile = {

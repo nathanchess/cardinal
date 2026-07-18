@@ -14,6 +14,10 @@ import { ProjectMission } from "@/components/ProjectMission";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
+const CURRENT_COLOR = "#9A9A93";
+const CANDIDATE_COLOR = "#1B6BC4";
+const LOSING_COLOR = "#E85D4C";
+
 type ResultsExperienceProps = {
   pipeline: PipelinePayload;
 };
@@ -105,6 +109,13 @@ export function ResultsExperience({ pipeline }: ResultsExperienceProps) {
           tab === "mission" ? "max-w-4xl" : "max-w-3xl"
         }`}
       >
+        {tab === "recommended" && list.length > 1 ? (
+          <RecommendationOverview
+            list={list}
+            activeIndex={index}
+            onSelect={setIndex}
+          />
+        ) : null}
         <AnimatePresence mode="wait">
           {tab === "mission" ? (
             <motion.div
@@ -160,6 +171,51 @@ function NavLink({
     >
       {children}
     </button>
+  );
+}
+
+function RecommendationOverview({
+  list,
+  activeIndex,
+  onSelect,
+}: {
+  list: RankedRecommendation[];
+  activeIndex: number;
+  onSelect: (index: number) => void;
+}) {
+  return (
+    <div className="mb-6 -mx-5 flex gap-2 overflow-x-auto px-5 pb-2 sm:-mx-8 sm:px-8">
+      {list.map((item, i) => {
+        const active = i === activeIndex;
+        const winning = item.delta_usd >= 0;
+        return (
+          <button
+            key={item.card_id}
+            type="button"
+            onClick={() => onSelect(i)}
+            className={`flex w-[128px] shrink-0 flex-col items-start gap-1 rounded-[10px] border px-3 py-2.5 text-left transition ${
+              active
+                ? "border-[var(--ink)] bg-[#F4F4F1]"
+                : "border-[var(--border)] bg-white hover:border-[var(--ink)]"
+            }`}
+          >
+            <span className="text-[10px] font-semibold uppercase tracking-[0.06em] text-[var(--muted)]">
+              #{i + 1}
+            </span>
+            <span className="line-clamp-2 text-[12px] font-semibold leading-tight text-[var(--ink)]">
+              {item.name}
+            </span>
+            <span
+              className="text-[13px] font-semibold tabular-nums"
+              style={{ color: winning ? CANDIDATE_COLOR : LOSING_COLOR }}
+            >
+              {winning ? "+" : "−"}
+              {formatMoney(Math.abs(item.delta_usd))}
+            </span>
+          </button>
+        );
+      })}
+    </div>
   );
 }
 
@@ -487,10 +543,6 @@ function FeaturedCardReport({
     </motion.article>
   );
 }
-
-const CURRENT_COLOR = "#9A9A93";
-const CANDIDATE_COLOR = "#1B6BC4";
-const LOSING_COLOR = "#E85D4C";
 
 function SavingsAreaChart({
   data,

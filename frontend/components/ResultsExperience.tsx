@@ -423,6 +423,7 @@ function FeaturedCardReport({
             data={cumulative}
             currentLabel={currentCardLabel}
             candidateLabel={rec.name}
+            isWinning={rec.delta_usd >= 0}
           />
         </div>
       </section>
@@ -492,15 +493,18 @@ function FeaturedCardReport({
 
 const CURRENT_COLOR = "#9A9A93";
 const CANDIDATE_COLOR = "#1B6BC4";
+const LOSING_COLOR = "#E85D4C";
 
 function SavingsAreaChart({
   data,
   currentLabel,
   candidateLabel,
+  isWinning,
 }: {
   data: { label: string; current: number; candidate: number }[];
   currentLabel: string;
   candidateLabel: string;
+  isWinning: boolean;
 }) {
   const width = 420;
   const height = 216;
@@ -511,13 +515,23 @@ function SavingsAreaChart({
   const plotW = width - padL - padR;
   const plotH = height - padT - padB;
 
-  const maxY = Math.max(...data.map((m) => Math.max(m.current, m.candidate)), 1);
-  const niceMax = niceCeil(maxY);
-  const yTicks = [0, 0.5, 1].map((t) => niceMax * t);
+  const gapColor = isWinning ? CANDIDATE_COLOR : LOSING_COLOR;
+
+  // Scale both axes to the full range actually present, not just the max --
+  // a candidate whose own net_annual_value_usd is negative (a bad fit, not
+  // just "worse than current") needs a negative floor too, or its line
+  // renders off the bottom of the plot.
+  const allValues = data.flatMap((m) => [m.current, m.candidate]);
+  const rawMax = Math.max(...allValues, 1);
+  const rawMin = Math.min(...allValues, 0);
+  const niceMax = niceCeil(rawMax);
+  const niceMin = rawMin < 0 ? -niceCeil(-rawMin) : 0;
+  const range = niceMax - niceMin || 1;
+  const yTicks = [0, 0.5, 1].map((t) => niceMin + t * range);
 
   const xFor = (i: number) =>
     padL + (data.length === 1 ? plotW / 2 : (i / (data.length - 1)) * plotW);
-  const yFor = (amount: number) => padT + plotH - (amount / niceMax) * plotH;
+  const yFor = (amount: number) => padT + plotH - ((amount - niceMin) / range) * plotH;
 
   const currentPts = data.map((m, i) => ({ x: xFor(i), y: yFor(m.current), ...m }));
   const candidatePts = data.map((m, i) => ({ x: xFor(i), y: yFor(m.candidate), ...m }));
@@ -525,10 +539,9 @@ function SavingsAreaChart({
   const currentLine = smoothLine(currentPts);
   const candidateLine = smoothLine(candidatePts);
 
-  // Shaded gap between the two lines -- candidate is always >= current here
-  // (top-10 list is already filtered to positive annual delta, and both
-  // trajectories are the same linear per-month accumulation), so tracing
-  // candidate forward then current backward always yields a valid polygon.
+  // Shaded gap between the two lines, tracing candidate forward then current
+  // backward -- valid whichever line is on top, since it's a closed polygon
+  // either way. Color (gapColor) carries the winning/losing signal instead.
   const gapPath = `${candidateLine} L ${currentPts[currentPts.length - 1]!.x} ${currentPts[currentPts.length - 1]!.y} ${[...currentPts]
     .reverse()
     .slice(1)
@@ -549,13 +562,13 @@ function SavingsAreaChart({
       >
         <defs>
           <linearGradient id="gapFill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor={CANDIDATE_COLOR} stopOpacity="0.16" />
-            <stop offset="100%" stopColor={CANDIDATE_COLOR} stopOpacity="0.03" />
+            <stop offset="0%" stopColor={gapColor} stopOpacity="0.16" />
+            <stop offset="100%" stopColor={gapColor} stopOpacity="0.03" />
           </linearGradient>
         </defs>
 
         {yTicks.map((tick) => {
-          const y = padT + plotH - (tick / niceMax) * plotH;
+          const y = yFor(tick);
           return (
             <g key={tick}>
               <line
@@ -563,7 +576,7 @@ function SavingsAreaChart({
                 x2={width - padR}
                 y1={y}
                 y2={y}
-                stroke="#E5E5E1"
+                stroke={Math.abs(tick) < 0.01 ? "#C9C9C2" : "#E5E5E1"}
                 strokeWidth={1}
               />
               <text

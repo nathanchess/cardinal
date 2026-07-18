@@ -145,6 +145,26 @@ BENEFIT_TOKENS = (
     ("rental", "rental_car_protection"),
 )
 
+BENEFIT_CATEGORY = {
+    "hotel_credit": "travel_hotels",
+    "travel_credit": "travel_other",
+    "dining_credit": "dining",
+    "rideshare_credit": "transit",
+    "global_entry_credit": "travel_flights",
+    "tsa_precheck_credit": "travel_flights",
+    "lounge_access": "travel_flights",
+    "checked_bag": "travel_flights",
+    "priority_boarding": "travel_flights",
+    "companion_pass": "travel_flights",
+    "free_night": "travel_hotels",
+    "hotel_status": "travel_hotels",
+    "trip_protection": "travel_other",
+    "purchase_protection": "general",
+    "warranty_protection": "general",
+    "cell_phone_protection": "utilities",
+    "rental_car_protection": "travel_other",
+}
+
 LIFESTYLE_TAGS = {
     "dining": "diner",
     "groceries": "grocery_shopper",

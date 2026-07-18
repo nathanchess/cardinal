@@ -10,6 +10,7 @@ import type { PipelinePayload } from "@/data/mock-savings";
 import { formatMoney } from "@/data/transactions";
 import type { CardValue, CategoryBreakdown, PricedBenefit } from "@/lib/calculator";
 import type { RankedRecommendation } from "@/lib/ranking";
+import { ProjectMission } from "@/components/ProjectMission";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -81,8 +82,9 @@ export function ResultsExperience({ pipeline }: ResultsExperienceProps) {
             </NavLink>
           </div>
           <a
-            href="#"
-            onClick={(e) => e.preventDefault()}
+            href="https://github.com/nathanchess/cardinal"
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border)] text-[var(--ink)] transition hover:border-[var(--ink)]"
             aria-label="GitHub"
           >
@@ -98,7 +100,11 @@ export function ResultsExperience({ pipeline }: ResultsExperienceProps) {
         </div>
       </motion.nav>
 
-      <div className="mx-auto max-w-3xl px-5 pb-24 pt-24 sm:px-8">
+      <div
+        className={`mx-auto px-5 pb-24 pt-24 sm:px-8 ${
+          tab === "mission" ? "max-w-4xl" : "max-w-3xl"
+        }`}
+      >
         <AnimatePresence mode="wait">
           {tab === "mission" ? (
             <motion.div
@@ -107,17 +113,8 @@ export function ResultsExperience({ pipeline }: ResultsExperienceProps) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.4, ease }}
-              className="pt-6 text-left"
             >
-              <h2 className="mb-3 font-wordmark text-[32px] font-medium tracking-[-0.06em] text-[var(--ink)]">
-                Project Mission
-              </h2>
-              <p className="max-w-xl text-[15px] leading-relaxed text-[var(--muted)]">
-                Cardinal matches how you already spend to cards that fit —
-                embedding your redacted activity, retrieving similar cards with
-                Redis vector search, then re-ranking by projected dollar value
-                against the card you have today.
-              </p>
+              <ProjectMission />
             </motion.div>
           ) : rec ? (
             <FeaturedCardReport
